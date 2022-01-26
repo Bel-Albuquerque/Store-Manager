@@ -5,8 +5,8 @@ const router = require('./routers/router');
 
 const app = express();
 
-app.use('/', router);
 app.use(bodyparser.json());
+app.use('/', router);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
