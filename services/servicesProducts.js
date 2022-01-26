@@ -1,12 +1,18 @@
 const modelProducts = require('../models/modelProducts');
 
 const createProduct = async (name, quantity) => {
- modelProducts.createProduct(name, quantity);
+ await modelProducts.createProduct(name, quantity);
  return true;
+};
+
+const getColumn = async (param = '*') => {
+const result = await modelProducts.getColumn(param);
+return result;
 };
 
 module.exports = {
   createProduct,
+  getColumn,
 };
 // if(!name) return 400
 
