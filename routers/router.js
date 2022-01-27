@@ -7,7 +7,12 @@ const validation = require('../middlewares/validation');
 
 router
 .route('/products/:id')
-.get(controllerProducts.getById);
+.get(controllerProducts.getById)
+.put(
+  validation.validationProductExists,
+  validation.validationLength,
+  validation.validationQuantityIsInteger,
+);
 
 router
 .route('/products')
