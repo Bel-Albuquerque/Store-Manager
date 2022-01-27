@@ -14,8 +14,13 @@ const getById = async (id) => {
   return result;
 };
 
+const editById = async (name, quantity, id) => {
+  await modelProducts.editById(name, quantity, id);
+};
+
 module.exports = {
   createProduct,
   getColumn,
   getById,
+  editById,
 };
