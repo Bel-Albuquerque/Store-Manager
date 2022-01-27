@@ -12,6 +12,7 @@ router
   validation.validationProductExists,
   validation.validationLength,
   validation.validationQuantityIsInteger,
+  controllerProducts.editById,
 );
 
 router
