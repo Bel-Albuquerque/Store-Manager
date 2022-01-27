@@ -18,9 +18,14 @@ const editById = async (name, quantity, id) => {
   await modelProducts.editById(name, quantity, id);
 };
 
+const deletById = async (id) => {
+  await modelProducts.deletById(id);
+};
+
 module.exports = {
   createProduct,
   getColumn,
   getById,
   editById,
+  deletById,
 };
