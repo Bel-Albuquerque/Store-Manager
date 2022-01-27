@@ -22,11 +22,6 @@ const getById = async (id) => {
   return result;
 };
 
-// UPDATE StoreManager.products
-// SET name = 'beu', quantity = 13
-
-// where id = 1
-
 const editById = async (name, quantity, id) => {
   await connection.execute(
     `
@@ -34,7 +29,6 @@ const editById = async (name, quantity, id) => {
     SET name = ?, quantity = ?
     where id = ?`, [name, quantity, id],
   );
-
 };
 
 module.exports = {
