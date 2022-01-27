@@ -6,7 +6,7 @@ const controllerProducts = require('../controllers/controllerProducts');
 const validation = require('../middlewares/validation');
 
 router
-.route('/products/:id')
+.route('/:id')
 .get(controllerProducts.getById)
 .put(
   validation.validationProductExists,
@@ -20,7 +20,7 @@ router
   );
 
 router
-.route('/products')
+.route('/')
 .post(
   validation.validationNameTrue,
   validation.validationLength,
