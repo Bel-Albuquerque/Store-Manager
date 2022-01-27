@@ -13,7 +13,11 @@ router
   validation.validationLength,
   validation.validationQuantityIsInteger,
   controllerProducts.editById,
-);
+)
+.delete(
+  validation.validationProductExists,
+  controllerProducts.deletById,
+  );
 
 router
 .route('/products')
