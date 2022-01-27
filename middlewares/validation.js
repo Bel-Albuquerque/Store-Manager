@@ -56,9 +56,7 @@ next();
 const validationProductExists = async (req, res, next) => {
   const { id } = req.params;
   const allProducts = await servicesProducts.getColumn('*');
-  console.log(allProducts);
   const findById = allProducts.some((product) => product.id === Number(id));
-  console.log(findById);
 
     if (!findById) {
  return res.status(404).json(
