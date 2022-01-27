@@ -9,7 +9,13 @@ const result = await modelProducts.getColumn(param);
 return result;
 };
 
+const getById = async (id) => {
+  const result = await modelProducts.getById(id);
+  return result;
+};
+
 module.exports = {
   createProduct,
   getColumn,
+  getById,
 };
