@@ -3,7 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 const controllerProducts = require('../controllers/controllerProducts');
-const validation = require('../middlewares/validation')
+const validation = require('../middlewares/validation');
+
+router
+.route('/products/:id')
+.get(controllerProducts.getById);
 
 router
 .route('/products')
@@ -13,8 +17,8 @@ router
   validation.validationFindName,
   validation.validationQuantityTrue,
   validation.validationQuantityIsInteger,
-
-  controllerProducts.createProduct)
+  controllerProducts.createProduct,
+)
 .get(controllerProducts.getColumn);
 
 module.exports = router;
