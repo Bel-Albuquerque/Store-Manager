@@ -21,6 +21,12 @@ const createSalesProducts = async (arraySale) => {
   return objSale;
 };
 
+const getSalesProducts = async () => {
+  const allSales = await modelSalesProducts.getSalesProducts()
+  return allSales;
+};
+
 module.exports = {
   createSalesProducts,
+  getSalesProducts,
 };
