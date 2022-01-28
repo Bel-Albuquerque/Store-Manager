@@ -11,12 +11,12 @@ const createSalesProducts = async (arraySale) => {
     itemsSold: arraySale,
   };
   
-  const array = []
-  arraySale.forEach(({ product_id, quantity }) => {
-    array.push(id, product_id, quantity);
+  const promiseSale = arraySale.map(async ({ product_id, quantity }) => {
+    console.log(product_id);
+    await modelSalesProducts.createSalesProducts(id, product_id, quantity);
   });
 
-  await modelSalesProducts.createSalesProducts(array);
+  await Promise.all(promiseSale)
 
   return objSale;
 };
