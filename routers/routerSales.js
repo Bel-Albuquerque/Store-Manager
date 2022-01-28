@@ -6,7 +6,13 @@ const router = express.Router();
 
 router
 .route('/:id')
-.get(controllerSales.getSalesAndProductsById);
+.get(controllerSales.getSalesAndProductsById)
+.put(
+  validations.validationQuantityTrue,
+  validations.validationPoductIdTrue,
+  validations.validationQuantityIsInteger,
+  controllerSales.updateSalesProducts,
+  );
 
 router
 .route('/')
