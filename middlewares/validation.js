@@ -34,8 +34,9 @@ next();
 };
 
 const validationQuantityTrue = (req, res, next) => {
-  const { quantity } = req.body;
-  if (!quantity && quantity !== 0) {
+  const requestFormat = Array.isArray(req.body);
+  const quantity = requestFormat ? req.body[0].quantity : req.body.quantity; 
+  if (quantity === undefined) {
  return res.status(400).json(
     { message: '"quantity" is required' },
 ); 
@@ -44,7 +45,8 @@ next();
 };
 
 const validationQuantityIsInteger = (req, res, next) => {
-  const { quantity } = req.body;
+  const requestFormat = Array.isArray(req.body);
+  const quantity = requestFormat ? req.body[0].quantity : req.body.quantity; 
   if (typeof quantity !== 'number' || quantity < 1) {
  return res.status(422).json(
   { message: '"quantity" must be a number larger than or equal to 1' },
@@ -66,6 +68,16 @@ const validationProductExists = async (req, res, next) => {
 next();
 };
 
+const validationPoductIdTrue = (req, res, next) => {
+  const bodyProducts = req.body;
+  if (!bodyProducts[0].product_id) {
+ return res.status(400).json(
+    { message: '"product_id" is required' },
+); 
+}
+next();
+};
+
 module.exports = {
   validationNameTrue,
   validationLength,
@@ -73,4 +85,5 @@ module.exports = {
   validationQuantityTrue,
   validationQuantityIsInteger,
   validationProductExists,
+  validationPoductIdTrue,
 };
