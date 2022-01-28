@@ -5,7 +5,7 @@ const modelSalesProducts = require('../models/modelSalesProducts');
 
 const createSalesProducts = async (arraySale) => {
   const id = await modelSales.createSales();
-  if (!arraySale) return false
+  if (!arraySale) return false;
   const objSale = {
     id,
     itemsSold: arraySale,
@@ -15,18 +15,18 @@ const createSalesProducts = async (arraySale) => {
     await modelSalesProducts.createSalesProducts(id, product_id, quantity);
   });
 
-  await Promise.all(promiseSale)
+  await Promise.all(promiseSale);
 
   return objSale;
 };
 
 const getAllSalesAndProducts = async () => {
-  const allSales = await modelSalesProducts.getAllSalesAndProducts()
+  const allSales = await modelSalesProducts.getAllSalesAndProducts();
   return allSales;
 };
 
 const getSalesAndProductsById = async (id) => {
-  const saleById = await modelSalesProducts.getSalesAndProductsById(id)
+  const saleById = await modelSalesProducts.getSalesAndProductsById(id);
   return saleById;
 };
 
@@ -36,13 +36,13 @@ const updateSalesProducts = async (saleId, arrayBody) => {
     itemUpdated: arrayBody,
   };
 
-  const { product_id, quantity } = arrayBody[0]
+  const { product_id, quantity } = arrayBody[0];
   
   console.log(saleId);
   console.log(product_id);
   console.log(quantity);
   console.log(objSale);
-  await modelSalesProducts.updateSalesProducts(Number(saleId), product_id, quantity)
+  await modelSalesProducts.updateSalesProducts(Number(saleId), product_id, quantity);
 
   return objSale;
 };
