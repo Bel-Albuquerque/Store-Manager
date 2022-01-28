@@ -12,7 +12,6 @@ const createSalesProducts = async (arraySale) => {
   };
   
   const promiseSale = arraySale.map(async ({ product_id, quantity }) => {
-    console.log(product_id);
     await modelSalesProducts.createSalesProducts(id, product_id, quantity);
   });
 
@@ -31,8 +30,26 @@ const getSalesAndProductsById = async (id) => {
   return saleById;
 };
 
+const updateSalesProducts = async (saleId, arrayBody) => {
+  const objSale = {
+    saleId: Number(saleId),
+    itemUpdated: arrayBody,
+  };
+
+  const { product_id, quantity } = arrayBody[0]
+  
+  console.log(saleId);
+  console.log(product_id);
+  console.log(quantity);
+  console.log(objSale);
+  await modelSalesProducts.updateSalesProducts(Number(saleId), product_id, quantity)
+
+  return objSale;
+};
+
 module.exports = {
   createSalesProducts,
   getAllSalesAndProducts,
   getSalesAndProductsById,
+  updateSalesProducts,
 };
