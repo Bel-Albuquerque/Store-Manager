@@ -8,8 +8,15 @@ if (!response) return res.status(404).json({ message: 'Sale not found' });
 };
 
 const getAllSalesAndProducts = async (req, res) => {
-const allSales = await serviceSales.getSalesProducts();
+const allSales = await serviceSales.getAllSalesAndProducts();
   return res.status(200).json(allSales);
+};
+
+const getSalesAndProductsById = async (req, res) => {
+  const { id } = req.params;
+  const saleById = await serviceSales.getSalesAndProductsById(id);
+  if (saleById.length < 1) return res.status(404).json({ message: 'Sale not found' });
+  return res.status(200).json(saleById);
 };
 
 module.exports = {
