@@ -26,6 +26,11 @@ const getAllSalesAndProducts = async () => {
   return allSales;
 };
 
+const getSalesAndProductsById = async (id) => {
+  const saleById = await modelSalesProducts.getSalesAndProductsById(id)
+  return saleById;
+};
+
 module.exports = {
   createSalesProducts,
   getAllSalesAndProducts,
