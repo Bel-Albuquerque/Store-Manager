@@ -17,16 +17,17 @@ const getSalesProducts = async () => {
 const getAllSalesAndProducts = async () => {
   const [result] = await connection.execute(
     `SELECT p.sale_id, s.date, p.product_id, p.quantity FROM StoreManager.sales s
-  INNER JOIN StoreManager.sales_products p`
+INNER JOIN StoreManager.sales_products p
+ON s.id = p.sale_id`,
   );
   return result;
-}
+};
 
 const getSalesAndProductsById = async (id) => {
   const [result] = await connection.execute(
-  `SELECT p.sale_id, s.date, p.product_id, p.quantity FROM StoreManager.sales s
-INNER JOIN StoreManager.sales_products p
-ON s.id = p.sale_id`, [id],
+  `  SELECT p.sale_id, s.date, p.product_id, p.quantity FROM StoreManager.sales s
+  INNER JOIN StoreManager.sales_products p
+  ON s.id = ? AND s.id = p.sale_id`, [id],
 );
   return result;
 };
