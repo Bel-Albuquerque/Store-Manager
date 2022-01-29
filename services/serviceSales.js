@@ -47,9 +47,19 @@ const updateSalesProducts = async (saleId, arrayBody) => {
   return objSale;
 };
 
+const deleteSales = async (id) => {
+  const result = await modelSalesProducts.getSalesAndProductsById(id);
+
+  await modelSalesProducts.deleteSalesProducts(id)
+  
+  await modelSales.deleteSales(id)
+  return result
+}
+
 module.exports = {
   createSalesProducts,
   getAllSalesAndProducts,
   getSalesAndProductsById,
   updateSalesProducts,
+  deleteSales,
 };
