@@ -1,4 +1,5 @@
 const servicesProducts = require('../services/servicesProducts');
+const serviceSales = require('../services/serviceSales');
 
 const validationNameTrue = (req, res, next) => {
   const { name } = req.body;
@@ -78,6 +79,13 @@ const validationPoductIdTrue = (req, res, next) => {
 next();
 };
 
+const validationSale = async (req, res, next) => {
+  const { id } = req.params;
+  const allSales = await serviceSales.getSalesAndProductsById(Number(id));
+  if (allSales.length < 1) return res.status(404).json({ message: 'Sale not found' });
+  next();
+};
+
 module.exports = {
   validationNameTrue,
   validationLength,
@@ -86,4 +94,5 @@ module.exports = {
   validationQuantityIsInteger,
   validationProductExists,
   validationPoductIdTrue,
+  validationSale,
 };
