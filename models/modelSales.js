@@ -26,4 +26,5 @@ const deleteSales = async (id) => {
 module.exports = {
   createSales,
   getSales,
+  deleteSales,
 };
