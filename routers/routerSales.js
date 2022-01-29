@@ -12,7 +12,11 @@ router
   validations.validationPoductIdTrue,
   validations.validationQuantityIsInteger,
   controllerSales.updateSalesProducts,
-  );
+  )
+.delete(
+  validations.validationSale,
+  controllerSales.deleteSales,
+);
 
 router
 .route('/')
