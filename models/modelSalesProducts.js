@@ -5,13 +5,8 @@ const createSalesProducts = async (par1, par2, par3) => {
   const query = `INSERT INTO StoreManager.sales_products
   (sale_id, product_id, quantity)
   VALUES (?, ?, ?)`;
-  const sale = await connection.execute(query, [par1, par2, par3]);
-  return sale;
-};
+  await connection.execute(query, [par1, par2, par3]);
 
-const getSalesProducts = async () => {
-  const [result] = await connection.execute('SELECT * FROM StoreManager.sales_products');
-  return result;
 };
 
 const getAllSalesAndProducts = async () => {
@@ -44,13 +39,12 @@ const deleteSalesProducts = async (saleId) => {
   const query = `   
   DELETE FROM StoreManager.sales_products
   WHERE sale_id = ?`;
-  const sale = await connection.execute(query, [saleId]);
-  return sale;
+  await connection.execute(query, [saleId]);
+
 };
 
 module.exports = {
   createSalesProducts,
-  getSalesProducts,
   getAllSalesAndProducts,
   getSalesAndProductsById,
   updateSalesProducts,

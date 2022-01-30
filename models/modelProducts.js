@@ -1,13 +1,14 @@
 const connection = require('./connection');
 
 const createProduct = async (name, quantity) => {
-  await connection.execute(
+  const [insert] = await connection.execute(
     `
     INSERT INTO StoreManager.products (name, quantity)
     VALUE
     (?, ?)
     `, [name, quantity],
   );
+  return { id: insert.insertId };
 };
 
 const getColumn = async (param) => {
@@ -38,10 +39,19 @@ const deletById = async (id) => {
   );
 };
 
+const changeProductQuantity = async (id, quantity) => {
+  const query = `
+  UPDATE StoreManager.products
+  SET quantity = ?
+  WHERE id = ?`;
+  await connection.execute(query, [quantity, id]);
+};
+
 module.exports = {
   createProduct,
   getColumn,
   getById,
   editById,
   deletById,
+  changeProductQuantity,
 };
