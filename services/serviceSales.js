@@ -1,5 +1,3 @@
-/* eslint-disable max-lines-per-function */
-/* eslint-disable semi */
 const modelSales = require('../models/modelSales');
 const modelSalesProducts = require('../models/modelSalesProducts');
 
@@ -38,10 +36,6 @@ const updateSalesProducts = async (saleId, arrayBody) => {
 
   const { product_id, quantity } = arrayBody[0];
   
-  console.log(saleId);
-  console.log(product_id);
-  console.log(quantity);
-  console.log(objSale);
   await modelSalesProducts.updateSalesProducts(Number(saleId), product_id, quantity);
 
   return objSale;
@@ -50,11 +44,11 @@ const updateSalesProducts = async (saleId, arrayBody) => {
 const deleteSales = async (id) => {
   const result = await modelSalesProducts.getSalesAndProductsById(id);
 
-  await modelSalesProducts.deleteSalesProducts(id)
+  await modelSalesProducts.deleteSalesProducts(id);
   
-  await modelSales.deleteSales(id)
-  return result
-}
+  await modelSales.deleteSales(id);
+  return result;
+};
 
 module.exports = {
   createSalesProducts,

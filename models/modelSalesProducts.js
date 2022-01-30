@@ -6,7 +6,6 @@ const createSalesProducts = async (par1, par2, par3) => {
   (sale_id, product_id, quantity)
   VALUES (?, ?, ?)`;
   await connection.execute(query, [par1, par2, par3]);
-
 };
 
 const getAllSalesAndProducts = async () => {
@@ -40,7 +39,6 @@ const deleteSalesProducts = async (saleId) => {
   DELETE FROM StoreManager.sales_products
   WHERE sale_id = ?`;
   await connection.execute(query, [saleId]);
-
 };
 
 module.exports = {
