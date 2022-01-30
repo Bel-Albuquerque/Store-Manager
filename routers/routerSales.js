@@ -24,6 +24,7 @@ router
   validations.validationPoductIdTrue,
   validations.validationQuantityTrue,
   validations.validationQuantityIsInteger,
+  // validations.changeProducts,
   controllerSales.createSales,
 )
 .get(controllerSales.getAllSalesAndProducts);

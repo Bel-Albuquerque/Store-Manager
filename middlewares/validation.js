@@ -86,6 +86,21 @@ const validationSale = async (req, res, next) => {
   next();
 };
 
+// const changeProducts = async (req, res, next) => {
+//   const arrayBody = req.body;
+
+//   const updateProductsQuantitys = arrayBody.map(async ({ product_id, quantity }) => {
+//     await servicesProducts.changeProductQuantity(product_id, quantity);
+//   });
+
+//   console.log(updateProductsQuantitys);
+//   await Promise.all(await updateProductsQuantitys);
+
+//   const itWorked = updateProductsQuantitys.some((result) => result === 'false');
+//   if (itWorked) return res.status(422).json({ message: 'Such amount is not permitted to sell' });
+//   next();
+// };
+
 module.exports = {
   validationNameTrue,
   validationLength,
@@ -95,4 +110,5 @@ module.exports = {
   validationProductExists,
   validationPoductIdTrue,
   validationSale,
+  // changeProducts,
 };
