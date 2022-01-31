@@ -1,5 +1,6 @@
 const modelSales = require('../models/modelSales');
 const modelSalesProducts = require('../models/modelSalesProducts');
+const servicesProducts = require('./servicesProducts');
 
 const createSalesProducts = async (arraySale) => {
   const id = await modelSales.createSales();
@@ -47,6 +48,9 @@ const deleteSales = async (id) => {
   await modelSalesProducts.deleteSalesProducts(id);
   
   await modelSales.deleteSales(id);
+  const promiese = result.map((produto) => servicesProducts.changeProductQuantity(produto.product_id, -produto.quantity)); 
+
+  Promise.all(promiese);
   return result;
 };
 

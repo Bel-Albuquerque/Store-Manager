@@ -86,20 +86,37 @@ const validationSale = async (req, res, next) => {
   next();
 };
 
-// const changeProducts = async (req, res, next) => {
-//   const arrayBody = req.body;
+const checkQuantityProducts = (products, id, quantity0, quantity = 0) => {
+  const product = products.find((objProduct) => objProduct.id === id);
+  if (quantity === 0) {
+    const newQuantity = product.quantity - quantity0;
+     if (newQuantity < 0) return false;
+  }
+const newQuantity = product.quantity + (quantity0 - quantity);
+if (newQuantity < 0) return false;
+return true;
+};
 
-//   const updateProductsQuantitys = arrayBody.map(async ({ product_id, quantity }) => {
-//     await servicesProducts.changeProductQuantity(product_id, quantity);
-//   });
+const changeProductsInCreate = async (req, res, next) => {
+  const arrayBody = req.body;
+  const products = await servicesProducts.getColumn('*');
 
-//   console.log(updateProductsQuantitys);
-//   await Promise.all(await updateProductsQuantitys);
+  const itWorked = arrayBody.map(({ product_id, quantity }) => (
+    checkQuantityProducts(products, product_id, quantity)));
+    console.log(itWorked);
 
-//   const itWorked = updateProductsQuantitys.some((result) => result === 'false');
-//   if (itWorked) return res.status(422).json({ message: 'Such amount is not permitted to sell' });
-//   next();
-// };
+  if (itWorked.some((result) => result === false)) {
+    return res.status(422).json({ message: 'Such amount is not permitted to sell' });
+  }
+
+  const updateProductsQuantitys = arrayBody.map(async ({ product_id, quantity }) => {
+    await servicesProducts.changeProductQuantity(product_id, quantity);
+  });
+
+  await Promise.all(await updateProductsQuantitys);
+
+  next();
+};
 
 module.exports = {
   validationNameTrue,
@@ -110,5 +127,5 @@ module.exports = {
   validationProductExists,
   validationPoductIdTrue,
   validationSale,
-  // changeProducts,
+changeProductsInCreate,
 };
