@@ -48,7 +48,8 @@ const deleteSales = async (id) => {
   await modelSalesProducts.deleteSalesProducts(id);
   
   await modelSales.deleteSales(id);
-  const promiese = result.map((produto) => servicesProducts.changeProductQuantity(produto.product_id, -produto.quantity)); 
+  const promiese = result.map((produto) => (
+    servicesProducts.changeProductQuantity(produto.product_id, -produto.quantity))); 
 
   Promise.all(promiese);
   return result;
