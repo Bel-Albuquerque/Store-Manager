@@ -185,151 +185,167 @@ describe('Ao chamar o deleteSales', () => {
 
 });
 
-// describe('Ao chamar o createProduct', () => {
-//     const response = {};
-//     const request = {};
+describe('Ao chamar o createProduct', () => {
+    const response = {};
+    const request = {};
 
-//     before(() => {
-//       request.body = {
-//         name: "bibelo",
-//         quantity: "30"
-//       };
+    before(() => {
+      request.body = {
+        name: "bibelo",
+        quantity: "30"
+      };
 
-//       response.status = sinon.stub()
-//         .returns(response);
-//       response.json = sinon.stub()
-//         .returns();
-//       sinon.stub(servicesProducts, 'createProduct')
-//         .resolves(true);
-//     });
+    response.status = sinon.stub()
+      .returns(response);
+    response.json = sinon.stub()
+      .returns();
+    sinon.stub(servicesProducts, 'createProduct')
+      .resolves(true);
+    sinon.stub(controllerProducts, 'findProductByName')
+      .resolves(true);
+    sinon.stub(servicesProducts, 'getColumn')
+      .resolves([{
+        id: 1,
+        name: "bibelo",
+        quantity: "30"
+      }]);
+  });
 
-//     after(() => {
-//       servicesProducts.createProduct.restore();
-//     });
+  after(() => {
+    servicesProducts.createProduct.restore();
+    servicesProducts.getColumn.restore();
+    controllerProducts.findProductByName.restore();
+  });
 
-//     it('é chamado o status com o código 201', async () => {
-//       await controllerProducts.createProduct(request, response);
+    it('é chamado o status com o código 201', async () => {
+      await controllerProducts.createProduct(request, response);
 
-//       expect(response.status.calledWith(201)).to.be.equal(true);
-//     });
+      expect(response.status.calledWith(201)).to.be.equal(true);
+    });
 
-//     it('é chamado o json', async () => {
-//       await controllerProducts.createProduct(request, response);
+    it('é chamado o json', async () => {
+      await controllerProducts.createProduct(request, response);
 
-//       expect(response.json.called).to.be.equal(true);
-//     });
+      expect(response.json.called).to.be.equal(true);
+    });
 
-//   });
+  });
 
-//   describe('Ao chamar o getColumn', () => {
-//     const response = {};
-//     const request = {};
-//     const produtoCadastrado = { id: 1, name: "produto", quantity: 10 };
+  describe('Ao chamar o getColumn', () => {
+    const response = {};
+    const request = {};
+    const produtoCadastrado = { id: 1, name: "produto", quantity: 10 };
 
-//     before(() => {
-//       request.body = {};
+    before(() => {
+      request.body = {};
 
-//       response.status = sinon.stub()
-//         .returns(response);
-//       response.json = sinon.stub()
-//         .returns();
-//       sinon.stub(servicesProducts, 'getColumn')
-//         .resolves(true);
-//     });
+      response.status = sinon.stub()
+        .returns(response);
+      response.json = sinon.stub()
+        .returns();
+      sinon.stub(servicesProducts, 'getColumn')
+        .resolves(true);
+    });
 
-//     after(() => {
-//       servicesProducts.getColumn.restore();
-//     });
+    after(() => {
+      servicesProducts.getColumn.restore();
+    });
 
-//     it('é chamado o status com o código 200', async () => {
-//       await controllerProducts.getColumn(request, response);
-//       console.log(response.status);
+    it('é chamado o status com o código 200', async () => {
+      await controllerProducts.getColumn(request, response);
+      console.log(response.status);
 
-//       expect(response.status.calledWith(200)).to.be.equal(true);
-//     });
+      expect(response.status.calledWith(200)).to.be.equal(true);
+    });
 
-//     it('é chamado o json', async () => {
-//       await controllerProducts.getColumn(request, response);
+    it('é chamado o json', async () => {
+      await controllerProducts.getColumn(request, response);
 
-//       expect(response.json.called).to.be.equal(true);
-//     });
+      expect(response.json.called).to.be.equal(true);
+    });
 
-//   });
+  });
 
-//   describe('Ao chamar o editById', () => {
-//     const response = {};
-//     const request = {};
-//     const produtoCadastrado = { id: 1, name: "produto", quantity: 10 };
+  describe('Ao chamar o editById', () => {
+    const response = {};
+    const request = {};
+    const produtoCadastrado = { id: 1, name: "produto", quantity: 10 };
 
-//     before(() => {
-//       request.params = { id: 1 }
-//       request.body = {
-//         name: "bibelo",
-//         quantity: "30"
-//       };
+    before(() => {
+      request.params = { id: 1 }
+      request.body = {
+        name: "bibelo",
+        quantity: "30"
+      };
 
-//       response.status = sinon.stub()
-//         .returns(response);
-//       response.json = sinon.stub()
-//         .returns();
-//       sinon.stub(servicesProducts, 'editById')
-//         .resolves(true);
-//     });
+      response.status = sinon.stub()
+        .returns(response);
+      response.json = sinon.stub()
+        .returns();
+      sinon.stub(servicesProducts, 'editById')
+        .resolves(true);
+      sinon.stub(servicesProducts, 'getById')
+        .resolves(true);
+    });
 
-//     after(() => {
-//       servicesProducts.editById.restore();
-//     });
+    after(() => {
+      servicesProducts.editById.restore();
+      servicesProducts.getById.restore();
+    });
 
-//     it('é chamado o status com o código 200', async () => {
-//       await controllerProducts.editById(request, response);
-//       console.log(response.status);
+    it('é chamado o status com o código 200', async () => {
+      await controllerProducts.editById(request, response);
+      console.log(response.status);
 
-//       expect(response.status.calledWith(200)).to.be.equal(true);
-//     });
+      expect(response.status.calledWith(200)).to.be.equal(true);
+    });
 
-//     it('é chamado o json', async () => {
-//       await controllerProducts.editById(request, response);
+    it('é chamado o json', async () => {
+      await controllerProducts.editById(request, response);
 
-//       expect(response.json.called).to.be.equal(true);
-//     });
+      expect(response.json.called).to.be.equal(true);
+    });
 
-//   });
+  });
 
-//   describe('Ao chamar o deletById', () => {
-//     const response = {};
-//     const request = {};
-//     const produtoCadastrado = { id: 1, name: "produto", quantity: 10 };
+  describe('Ao chamar o deletById', () => {
+    const response = {};
+    const request = {};
+    const produtoCadastrado = { id: 1, name: "produto", quantity: 10 };
 
-//     before(() => {
-//       request.params = { id: 1 }
-//       request.body = {
-//         name: "bibelo",
-//         quantity: "30"
-//       };
+    before(() => {
+      request.params = { id: 1 }
+      request.body = {
+        name: "bibelo",
+        quantity: "30"
+      };
 
-//       response.status = sinon.stub()
-//         .returns(response);
-//       response.json = sinon.stub()
-//         .returns();
-//       sinon.stub(servicesProducts, 'deletById')
-//         .resolves(true);
-//     });
+      response.status = sinon.stub()
+        .returns(response);
+      response.json = sinon.stub()
+        .returns();
+      sinon.stub(servicesProducts, 'getById')
+        .resolves(true);      
+      sinon.stub(servicesProducts, 'deletById')
+        .resolves(true);
+    });
 
-//     after(() => {
-//       servicesProducts.deletById.restore();
-//     });
+    after(() => {
+      servicesProducts.getById.restore();
+      servicesProducts.deletById.restore();
+    });
 
-//     it('é chamado o status com o código 200', async () => {
-//       await controllerProducts.deletById(request, response);
-//       console.log(response.status);
+    it('é chamado o status com o código 200', async () => {
+      await controllerProducts.deletById(request, response);
+      console.log(response.status);
 
-//       expect(response.status.calledWith(200)).to.be.equal(true);
-//     });
+      expect(response.status.calledWith(200)).to.be.equal(true);
+    });
 
-//     it('é chamado o json', async () => {
-//       await controllerProducts.deletById(request, response);
+    it('é chamado o json', async () => {
+      await controllerProducts.deletById(request, response);
 
-//       expect(response.json.called).to.be.equal(true);
-//     });
+      expect(response.json.called).to.be.equal(true);
+    });
 
-//   });
+  });

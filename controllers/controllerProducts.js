@@ -49,4 +49,5 @@ module.exports = {
   getById,
   editById,
   deletById,
+  findProductByName,
 };
